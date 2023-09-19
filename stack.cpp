@@ -1,49 +1,46 @@
-#include <iostream>
 #include "stack.h"
 
-void initializeStack(Stack *pStack) {
-  pStack -> top = NULL;
-  pStack -> size = 0;
+#include <iostream>
+
+void InitializeStack(Stack *pStack) {
+  pStack->top = nullptr;
+  pStack->size = 0;
 }
 
-StackNode * createNode(StackEntry item) {
+StackNode *CreateNode(StackEntry item) {
   StackNode *pStackNode = (StackNode *)malloc(sizeof(StackNode));
-  pStackNode -> entry = item;
-  pStackNode -> next = NULL;
+  pStackNode->entry = item;
+  pStackNode->next = nullptr;
   return pStackNode;
 }
 
-void push(StackEntry item, Stack *pStack) {
-  StackNode *pStackNode = createNode(item);
-  pStackNode -> next = pStack -> top;
-  pStack -> top = pStackNode;
-  pStack -> size++;
+void Push(Stack *pStack, StackEntry item) {
+  StackNode *pStackNode = CreateNode(item);
+  pStackNode->next = pStack->top;
+  pStack->top = pStackNode;
+  pStack->size++;
 }
 
-void pop(StackEntry item, Stack *pStack) {
-  StackNode *pStackNode = pStack -> top;
-  item = pStackNode -> entry;
-  pStack -> top = pStackNode -> next;
+void Pop(Stack *pStack, StackEntry *item) {
+  StackNode *pStackNode = pStack->top;
+  *item = pStackNode->entry;
+  pStack->top = pStackNode->next;
   free(pStackNode);
-  pStack -> size--;
+  pStack->size--;
 }
 
-int stackEmpty(Stack *pStack) {
-  return pStack -> top == NULL;
-}
+int StackEmpty(Stack *pStack) { return pStack->top == nullptr; }
 
-int stackFull(Stack *pStack) {
-  return 0;
-}
+int StackFull(Stack *pStack) { return 0; }
 
-void clearStack(Stack *pStack) {
-  StackNode *pStackNode = pStack -> top;
+void ClearStack(Stack *pStack) {
+  StackNode *pStackNode = pStack->top;
   while (pStackNode) {
-    pStack -> top = pStackNode -> next;
+    pStack->top = pStackNode->next;
     free(pStackNode);
-    pStackNode = pStack -> top;
+    pStackNode = pStack->top;
   }
-  pStack -> size = 0;
+  pStack->size = 0;
 }
 
 // int stackSize(Stack *pStack) {
@@ -55,15 +52,13 @@ void clearStack(Stack *pStack) {
 //   return size;
 // }
 
-int stackSize(Stack *pStack) {
-  return pStack -> size;
-}
+int StackSize(Stack *pStack) { return pStack->size; }
 
-void traverseStack(Stack *pStack, void (*pVisit)(StackEntry item)) {
-  StackNode *pStackNode = pStack -> top;
+void TraverseStack(Stack *pStack, void (*pVisit)(StackEntry item)) {
+  StackNode *pStackNode = pStack->top;
   while (pStackNode) {
-    (*pVisit)(pStackNode -> entry);
-    pStackNode = pStackNode -> next;
+    (*pVisit)(pStackNode->entry);
+    pStackNode = pStackNode->next;
   }
 }
 

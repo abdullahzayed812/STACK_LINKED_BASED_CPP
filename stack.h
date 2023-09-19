@@ -16,11 +16,11 @@ typedef struct stack {
 
 #endif
 
-void initializeStack(Stack *);
-void push(StackEntry, Stack *);
-void pop(StackEntry&, Stack *);
-int stackEmpty(Stack *);
-int stackFull(Stack *);
-void clearStack(Stack *);
-int stackSize(Stack *);
-void traverseStack(Stack *, void (*)(StackEntry));
+void InitializeStack(Stack *);
+void Push(Stack *, StackEntry);
+void Pop(Stack *, StackEntry *);
+int StackEmpty(Stack *);
+int StackFull(Stack *);
+void ClearStack(Stack *);
+int StackSize(Stack *);
+void TraverseStack(Stack *, void (*)(StackEntry));
